@@ -188,6 +188,18 @@
                     </div>
                 </div>
 
+                <div id="portalEncouragementBox" class="relative z-10 mt-4 bg-gradient-to-l from-amber-50 via-indigo-50 to-emerald-50 border border-amber-200/80 rounded-2xl p-4 flex items-start gap-3 shadow-sm">
+                    <div id="portalEncouragementIcon" class="w-10 h-10 rounded-xl bg-amber-400/25 text-amber-700 flex items-center justify-center text-xl shrink-0">
+                        🌟
+                    </div>
+                    <div class="min-w-0 flex-grow">
+                        <div id="portalEncouragementTitle" class="text-xs font-black text-indigo-950">رسالة تشجيعية لك</div>
+                        <p id="portalEncouragementMessage" class="text-xs font-bold text-slate-700 mt-1 leading-relaxed">
+                            كل خطوة صغيرة في الحضور والمشاركة تصنع فرقاً كبيراً في مستقبلك الدراسي. نحن فخورون باجتهادك!
+                        </p>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6 pt-6 border-t border-slate-100">
                     <div onclick="openPortalCategoryModal('present')" class="bg-emerald-50 hover:bg-emerald-100 transition cursor-pointer p-3 rounded-xl border border-emerald-200 text-center shadow-sm">
                         <span class="text-[11px] font-bold text-emerald-700 block">أيام الحضور</span>
@@ -463,6 +475,58 @@
                                 </div>
                             </div>
                             <i class="fa-solid fa-chevron-left text-[10px] text-purple-300/60"></i>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-indigo-800/60 space-y-2">
+                        <div class="flex items-center justify-between gap-2 flex-wrap">
+                            <span class="text-xs font-black text-amber-200 flex items-center gap-1.5">
+                                <i class="fa-solid fa-award text-amber-300"></i>
+                                أبرز المؤشرات والتحفيز الفوري للطلاب
+                            </span>
+                            <span class="text-[11px] text-indigo-200 font-semibold">اضغط على أي مؤشر لعرض القائمة الكاملة ومشاركتها</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+                            <div onclick="openHighlightModal('most_absent')" class="bg-rose-950/55 hover:bg-rose-800/50 border border-rose-400/30 rounded-xl p-3 cursor-pointer transition shadow-sm flex items-center justify-between gap-2 group">
+                                <div class="min-w-0">
+                                    <span class="text-[11px] font-bold text-rose-200 block">⚠️ الأكثر غياباً</span>
+                                    <span id="highlightMostAbsent" class="text-xs font-black text-white truncate block mt-0.5">لا يوجد بعد</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-left text-[10px] text-rose-300/70 shrink-0"></i>
+                            </div>
+
+                            <div onclick="openHighlightModal('most_present')" class="bg-emerald-950/55 hover:bg-emerald-800/50 border border-emerald-400/30 rounded-xl p-3 cursor-pointer transition shadow-sm flex items-center justify-between gap-2 group">
+                                <div class="min-w-0">
+                                    <span class="text-[11px] font-bold text-emerald-200 block">🏅 الأكثر حضوراً</span>
+                                    <span id="highlightMostPresent" class="text-xs font-black text-white truncate block mt-0.5">لا يوجد بعد</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-left text-[10px] text-emerald-300/70 shrink-0"></i>
+                            </div>
+
+                            <div onclick="openHighlightModal('most_participating')" class="bg-sky-950/55 hover:bg-sky-800/50 border border-sky-400/30 rounded-xl p-3 cursor-pointer transition shadow-sm flex items-center justify-between gap-2 group">
+                                <div class="min-w-0">
+                                    <span class="text-[11px] font-bold text-sky-200 block">💡 الأكثر مشاركة</span>
+                                    <span id="highlightMostParticipating" class="text-xs font-black text-white truncate block mt-0.5">لا يوجد بعد</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-left text-[10px] text-sky-300/70 shrink-0"></i>
+                            </div>
+
+                            <div onclick="openHighlightModal('least_participating')" class="bg-amber-950/55 hover:bg-amber-800/50 border border-amber-400/30 rounded-xl p-3 cursor-pointer transition shadow-sm flex items-center justify-between gap-2 group">
+                                <div class="min-w-0">
+                                    <span class="text-[11px] font-bold text-amber-200 block">🌱 الأقل مشاركة (للتشجيع)</span>
+                                    <span id="highlightLeastParticipating" class="text-xs font-black text-white truncate block mt-0.5">لا يوجد بعد</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-left text-[10px] text-amber-300/70 shrink-0"></i>
+                            </div>
+
+                            <div onclick="openHighlightModal('most_engaged')" class="bg-purple-950/55 hover:bg-purple-800/50 border border-purple-400/30 rounded-xl p-3 cursor-pointer transition shadow-sm flex items-center justify-between gap-2 group">
+                                <div class="min-w-0">
+                                    <span class="text-[11px] font-bold text-purple-200 block">🌟 الأكثر تفاعلاً</span>
+                                    <span id="highlightMostEngaged" class="text-xs font-black text-white truncate block mt-0.5">لا يوجد بعد</span>
+                                </div>
+                                <i class="fa-solid fa-chevron-left text-[10px] text-purple-300/70 shrink-0"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -782,6 +846,38 @@
             <div class="p-3.5 bg-slate-50 border-t border-slate-100 flex justify-between items-center shrink-0">
                 <span id="portalModalCountBadge" class="text-xs font-bold text-slate-600 bg-slate-200 px-2.5 py-1 rounded-lg">الإجمالي: 0</span>
                 <button onclick="closePortalCategoryModal()" class="px-4 py-1.5 rounded-xl bg-slate-200 text-slate-700 font-bold text-xs transition">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="highlightInsightsModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl border border-slate-200 w-full max-w-2xl overflow-hidden transform transition-all flex flex-col max-h-[85vh]">
+            <div id="highlightModalHeader" class="p-4 sm:p-5 bg-indigo-900 text-white flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-3 min-w-0">
+                    <span id="highlightModalIcon" class="text-2xl shrink-0">🌟</span>
+                    <div class="min-w-0">
+                        <h3 id="highlightModalTitle" class="text-base sm:text-lg font-black truncate">مؤشر الطلاب</h3>
+                        <p id="highlightModalSubtitle" class="text-[11px] sm:text-xs text-indigo-200 mt-0.5 truncate">التفاصيل والتحفيز</p>
+                    </div>
+                </div>
+                <button onclick="closeHighlightModal()" class="text-indigo-200 hover:text-white transition shrink-0 mr-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div id="highlightModalContent" class="p-4 sm:p-6 space-y-3 overflow-y-auto custom-scrollbar flex-grow"></div>
+
+            <div class="p-3.5 sm:p-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center shrink-0 flex-wrap gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span id="highlightModalCountBadge" class="text-xs font-bold text-slate-600 bg-slate-200 px-3 py-1.5 rounded-xl">العدد: 0</span>
+                    <button onclick="copyHighlightSummaryToClipboard()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow-sm inline-flex items-center gap-1">
+                        <i class="fa-regular fa-copy"></i> نسخ الملخص
+                    </button>
+                    <button onclick="sendHighlightSummaryToWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow-sm inline-flex items-center gap-1">
+                        <i class="fa-brands fa-whatsapp"></i> إرسال واتساب
+                    </button>
+                </div>
+                <button onclick="closeHighlightModal()" class="px-5 py-2 rounded-xl bg-slate-200 text-slate-700 font-bold text-sm transition">إغلاق</button>
             </div>
         </div>
     </div>
@@ -1514,7 +1610,12 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
 
         function sendStudentPortalToWhatsApp() {
             const portalUrl = document.getElementById('studentPortalShareUrlInput').value;
-            const rawMessage = `أبنائي الطلاب،\n\nيمكنكم الاطلاع على سجل الحضور والغياب والواجبات والملاحظات الخاصة بكم مباشرة عبر إدخال بريدكم الإلكتروني المدرسي في الرابط التالي:\n${portalUrl}\n\nإعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
+            const rawMessage = `أبنائي الطلاب،
+
+يمكنكم الاطلاع على سجل الحضور والغياب والواجبات والملاحظات الخاصة بكم مباشرة عبر إدخال بريدكم الإلكتروني المدرسي في الرابط التالي:
+${portalUrl}
+
+إعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(rawMessage)}`, '_blank');
         }
 
@@ -1682,8 +1783,11 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 behaviorsSnap.forEach(doc => { behaviorsRecordsBackup[doc.id] = doc.data(); });
 
                 const fullBackup = {
-                    version: "1.0",
+                    version: "1.1",
                     exportDate: new Date().toISOString(),
+                    teacher: "أ/ عبدالعزيز الفيفي",
+                    school: "ثانوية الأمير عبدالمجيد",
+                    activeGroupAtExport: activeGroup,
                     attendance_records: attendanceRecordsBackup,
                     student_behaviors_records: behaviorsRecordsBackup
                 };
@@ -1732,8 +1836,10 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 }
 
                 const fullPayload = {
-                    version: "2.0-from-scratch",
+                    version: "2.1-from-scratch",
                     exportedAt: new Date().toISOString(),
+                    teacher: "أ/ عبدالعزيز الفيفي",
+                    school: "ثانوية الأمير عبدالمجيد",
                     projectId: firebaseConfig.projectId,
                     firestore: firestoreDump,
                     localStorage: localStore,
@@ -1931,7 +2037,15 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
             const rate = totalEval > 0 ? Math.round(((present + late) / totalEval) * 100) : 0;
             const rateBadge = document.getElementById('portalRateBadge');
             rateBadge.textContent = `${rate}%`;
-            rateBadge.className = rate >= 75 ? "text-lg font-black text-emerald-600" : "text-lg font-black text-rose-600";
+            rateBadge.className = rate >= 75 ? "text-lg font-black text-emerald-400" : "text-lg font-black text-rose-400";
+            updateStudentEncouragement({
+                present,
+                absent,
+                late,
+                participationsCount,
+                homeworkDoneCount,
+                totalBehaviorScore
+            });
         }
 
         function openPortalCategoryModal(categoryType) {
@@ -2557,6 +2671,7 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
             const dayForgotCountEl = document.getElementById('dayForgotFileCount');
             if(dayForgotCountEl) dayForgotCountEl.textContent = forgotCount;
             document.getElementById('dayBehaviorsCount').textContent = behCount;
+            updateHighlightCards();
         }
 
         function exportCurrentModalCSV() {
@@ -2567,7 +2682,7 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 return actGroup === 'الجميع' || sGroup === actGroup;
             });
 
-            let csvContent = "\uFEFF";
+            let csvContent = "﻿";
             let rowSeq = 0;
             if (currentModalCategory === 'present' || currentModalCategory === 'absent' || currentModalCategory === 'late' || currentModalCategory === 'excused' || currentModalCategory === 'other' || currentModalCategory === 'high_absent') {
                 csvContent += `الرقم التسلسلي,اسم الطالب,البريد الإلكتروني,الفصل,الحالة/التفاصيل\n`;
@@ -2654,7 +2769,12 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
             };
 
             const catTitle = categoryNames[currentModalCategory] || 'تقرير الفئة المحددة';
-            const rawMessage = `سعادة مدير المدرسة المحترم،\n\nالاطلاع على (${catTitle}) للفصل: (${activeGroup}) ليوم (${dayName}) بتاريخ (${targetDate}) عبر الرابط:\n${shareUrl}\n\nإعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
+            const rawMessage = `سعادة مدير المدرسة المحترم،
+
+الاطلاع على (${catTitle}) للفصل: (${activeGroup}) ليوم (${dayName}) بتاريخ (${targetDate}) عبر الرابط:
+${shareUrl}
+
+إعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(rawMessage)}`, '_blank');
         }
 
@@ -3626,7 +3746,7 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 return;
             }
 
-            let csvContent = "\uFEFF"; 
+            let csvContent = "﻿"; 
             csvContent += `الرقم,اسم الطالب,البريد الإلكتروني,الفصل/المجموعة,حالة الحضور ووقت الرصد\n`;
 
             activeStudents.forEach(student => {
@@ -3672,7 +3792,12 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
 
         function sendReportToWhatsAppManager() {
             const shareUrl = document.getElementById('shareUrlInput').value;
-            const rawMessage = `سعادة مدير المدرسة المحترم،\n\nيمكنكم الاطلاع على لوحة المتابعة الكاملة للفصل: (${activeGroup}) عبر الرابط:\n${shareUrl}\n\nإعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
+            const rawMessage = `سعادة مدير المدرسة المحترم،
+
+يمكنكم الاطلاع على لوحة المتابعة الكاملة للفصل: (${activeGroup}) عبر الرابط:
+${shareUrl}
+
+إعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
             window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(rawMessage)}`, '_blank');
         }
 
@@ -3697,6 +3822,263 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
                 toast.classList.remove('opacity-100', 'translate-y-0');
             }, 2500);
+        }
+
+        let currentHighlightType = null;
+        let lastHighlightTextSummary = '';
+
+        function computeStudentMetricsForActiveGroup() {
+            const filtered = students.filter(s => {
+                const sGroup = (s.group || '').trim();
+                const actGroup = activeGroup.trim();
+                return actGroup === 'الجميع' || sGroup === actGroup;
+            });
+
+            return filtered.map(student => {
+                let presentDays = 0;
+                let absentDays = 0;
+                let lateDays = 0;
+                let excusedDays = 0;
+
+                Object.keys(allAttendanceRecords).forEach(date => {
+                    const rec = (allAttendanceRecords[date] || {})[student.id];
+                    if (!rec) return;
+                    const st = typeof rec === 'object' ? rec.status : rec;
+                    if (st === 'present') presentDays++;
+                    else if (st === 'absent') absentDays++;
+                    else if (st === 'late') lateDays++;
+                    else if (st === 'excused') excusedDays++;
+                });
+
+                let participationCount = 0;
+                let homeworkDoneCount = 0;
+                let totalScore = 0;
+                let totalEvents = 0;
+
+                Object.keys(allBehaviorsRecords).forEach(date => {
+                    const logs = (allBehaviorsRecords[date] || {})[student.id] || [];
+                    logs.forEach(item => {
+                        totalEvents++;
+                        const sc = Number(item.score || 0);
+                        totalScore += sc;
+                        const name = item.name || '';
+                        const isPart = name.includes('مشاركة') || name.includes('إجابة') || (!name.includes('واجب') && !name.includes('ملف') && !name.includes('بحث') && !item.isCustomNote && sc > 0);
+                        if (isPart) participationCount++;
+                        if (name.includes('حل الواجب') && !name.includes('لم يحل')) homeworkDoneCount++;
+                    });
+                });
+
+                const engagementIndex = Number((presentDays * 1 + participationCount * 2 + homeworkDoneCount * 2 + totalScore).toFixed(1));
+
+                return {
+                    student,
+                    presentDays,
+                    absentDays,
+                    lateDays,
+                    excusedDays,
+                    participationCount,
+                    homeworkDoneCount,
+                    totalScore,
+                    totalEvents,
+                    engagementIndex
+                };
+            });
+        }
+
+        function updateHighlightCards() {
+            const elAbsent = document.getElementById('highlightMostAbsent');
+            const elPresent = document.getElementById('highlightMostPresent');
+            const elPart = document.getElementById('highlightMostParticipating');
+            const elLeastPart = document.getElementById('highlightLeastParticipating');
+            const elEngaged = document.getElementById('highlightMostEngaged');
+            if (!elAbsent || !elPresent || !elPart || !elLeastPart || !elEngaged) return;
+
+            const metrics = computeStudentMetricsForActiveGroup();
+            if (metrics.length === 0) {
+                elAbsent.textContent = 'لا يوجد طلاب';
+                elPresent.textContent = 'لا يوجد طلاب';
+                elPart.textContent = 'لا يوجد طلاب';
+                elLeastPart.textContent = 'لا يوجد طلاب';
+                elEngaged.textContent = 'لا يوجد طلاب';
+                return;
+            }
+
+            const byAbsent = [...metrics].sort((a, b) => b.absentDays - a.absentDays || a.student.name.localeCompare(b.student.name, 'ar'));
+            elAbsent.textContent = byAbsent[0].absentDays > 0
+                ? `${byAbsent[0].student.name} (${byAbsent[0].absentDays} غياب)`
+                : 'لا يوجد غياب مسجل';
+
+            const byPresent = [...metrics].sort((a, b) => b.presentDays - a.presentDays || a.student.name.localeCompare(b.student.name, 'ar'));
+            elPresent.textContent = byPresent[0].presentDays > 0
+                ? `${byPresent[0].student.name} (${byPresent[0].presentDays} حضور)`
+                : 'لا يوجد حضور مسجل';
+
+            const byPart = [...metrics].sort((a, b) => b.participationCount - a.participationCount || b.totalScore - a.totalScore || a.student.name.localeCompare(b.student.name, 'ar'));
+            elPart.textContent = byPart[0].participationCount > 0
+                ? `${byPart[0].student.name} (${byPart[0].participationCount} مشاركة)`
+                : 'لم تُسجل مشاركات بعد';
+
+            const byLeastPart = [...metrics].sort((a, b) => a.participationCount - b.participationCount || a.totalScore - b.totalScore || a.student.name.localeCompare(b.student.name, 'ar'));
+            elLeastPart.textContent = `${byLeastPart[0].student.name} (${byLeastPart[0].participationCount} مشاركة)`;
+
+            const byEngaged = [...metrics].sort((a, b) => b.engagementIndex - a.engagementIndex || a.student.name.localeCompare(b.student.name, 'ar'));
+            elEngaged.textContent = byEngaged[0].engagementIndex > 0
+                ? `${byEngaged[0].student.name} (${byEngaged[0].engagementIndex} نقطة تفاعل)`
+                : 'لا يوجد تفاعل مسجل';
+        }
+
+        function openHighlightModal(type) {
+            currentHighlightType = type;
+            const modal = document.getElementById('highlightInsightsModal');
+            const header = document.getElementById('highlightModalHeader');
+            const icon = document.getElementById('highlightModalIcon');
+            const title = document.getElementById('highlightModalTitle');
+            const subtitle = document.getElementById('highlightModalSubtitle');
+            const content = document.getElementById('highlightModalContent');
+            const badge = document.getElementById('highlightModalCountBadge');
+
+            const metrics = computeStudentMetricsForActiveGroup();
+            let sorted = [];
+            let headerClass = 'bg-indigo-900';
+            let labelMetric = '';
+            let supportNote = '';
+
+            if (type === 'most_absent') {
+                headerClass = 'bg-rose-700';
+                icon.textContent = '⚠️';
+                title.textContent = 'قائمة الطلاب الأكثر غياباً';
+                subtitle.textContent = `الفصل: ${activeGroup} — متابعة مبكرة ودعم للعودة المنتظمة`;
+                sorted = [...metrics].filter(m => m.absentDays > 0).sort((a, b) => b.absentDays - a.absentDays);
+                labelMetric = m => `${m.absentDays} أيام غياب`;
+                supportNote = '💡 رسالة للمتابعة: التواصل الإيجابي والاهتمام بظروف الطالب يعززان عودته وانتظامه.';
+            } else if (type === 'most_present') {
+                headerClass = 'bg-emerald-700';
+                icon.textContent = '🏅';
+                title.textContent = 'قائمة الطلاب الأكثر حضوراً وانتظاماً';
+                subtitle.textContent = `الفصل: ${activeGroup} — تكريم الانضباط والالتزام اليومي`;
+                sorted = [...metrics].filter(m => m.presentDays > 0).sort((a, b) => b.presentDays - a.presentDays);
+                labelMetric = m => `${m.presentDays} أيام حضور`;
+                supportNote = '🌟 أحسنتم! الانتظام في الحضور هو أساس التفوق والنجاح المستمر.';
+            } else if (type === 'most_participating') {
+                headerClass = 'bg-sky-700';
+                icon.textContent = '💡';
+                title.textContent = 'قائمة الطلاب الأكثر مشاركة';
+                subtitle.textContent = `الفصل: ${activeGroup} — إشادة بالتفاعل والمبادرة داخل الصف`;
+                sorted = [...metrics].filter(m => m.participationCount > 0).sort((a, b) => b.participationCount - a.participationCount || b.totalScore - a.totalScore);
+                labelMetric = m => `${m.participationCount} مشاركة`;
+                supportNote = '👏 مشاركاتكم تثري الدرس وتلهم زملاءكم داخل الفصل!';
+            } else if (type === 'least_participating') {
+                headerClass = 'bg-amber-700';
+                icon.textContent = '🌱';
+                title.textContent = 'قائمة الطلاب الأقل مشاركة (فرصة للتشجيع)';
+                subtitle.textContent = `الفصل: ${activeGroup} — إتاحة فرص ميسرة وتحفيز لطيف للمشاركة`;
+                sorted = [...metrics].sort((a, b) => a.participationCount - b.participationCount || a.totalScore - b.totalScore);
+                labelMetric = m => `${m.participationCount} مشاركة`;
+                supportNote = '🌱 كل طالب يملك طاقة وإبداعاً؛ تشجيعه بسؤال مناسب يفتح له باب الثقة والمشاركة.';
+            } else if (type === 'most_engaged') {
+                headerClass = 'bg-purple-700';
+                icon.textContent = '🌟';
+                title.textContent = 'قائمة الطلاب الأكثر تفاعلاً وتميزاً';
+                subtitle.textContent = `الفصل: ${activeGroup} — الجمع بين الحضور والمشاركة والواجبات`;
+                sorted = [...metrics].filter(m => m.engagementIndex > 0).sort((a, b) => b.engagementIndex - a.engagementIndex);
+                labelMetric = m => `${m.engagementIndex} نقطة تفاعل`;
+                supportNote = '🏆 نموذج مشرف للتفاعل الإيجابي والاجتهاد المتواصل!';
+            }
+
+            header.className = `p-4 sm:p-5 text-white flex justify-between items-center shrink-0 ${headerClass}`;
+            content.innerHTML = '';
+
+            if (supportNote) {
+                const banner = document.createElement('div');
+                banner.className = 'p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs font-bold text-amber-950 leading-relaxed';
+                banner.textContent = supportNote;
+                content.appendChild(banner);
+            }
+
+            if (sorted.length === 0) {
+                const emptyBox = document.createElement('div');
+                emptyBox.className = 'p-8 text-center text-slate-400 font-bold text-sm';
+                emptyBox.textContent = 'لا توجد بيانات كافية لعرض هذه القائمة حالياً';
+                content.appendChild(emptyBox);
+                lastHighlightTextSummary = `${title.textContent} (${activeGroup}): لا توجد بيانات مسجلة حالياً.`;
+            } else {
+                const linesForShare = [`${icon.textContent} ${title.textContent} — الفصل: ${activeGroup} (${currentDate})`];
+                sorted.forEach((m, idx) => {
+                    const row = document.createElement('div');
+                    row.className = 'p-3.5 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 flex items-center justify-between gap-2 flex-wrap transition';
+                    row.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-indigo-950 text-amber-300 font-black text-xs flex items-center justify-center shrink-0">${idx + 1}</span>
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm">${escapeHtml(m.student.name)}</div>
+                                <div class="text-[11px] text-slate-500">${escapeHtml(m.student.group)} • حضور: ${m.presentDays} • غياب: ${m.absentDays} • مشاركات: ${m.participationCount}</div>
+                            </div>
+                        </div>
+                        <span class="px-3 py-1 rounded-lg bg-white border border-slate-300 text-xs font-black text-indigo-900">${labelMetric(m)}</span>
+                    `;
+                    content.appendChild(row);
+                    linesForShare.push(`${idx + 1}. ${m.student.name} — ${labelMetric(m)}`);
+                });
+                lastHighlightTextSummary = linesForShare.join('\n');
+            }
+
+            badge.textContent = `العدد: ${sorted.length}`;
+            modal.classList.remove('hidden');
+            updateFloatingClockVisibility();
+        }
+
+        function closeHighlightModal() {
+            document.getElementById('highlightInsightsModal').classList.add('hidden');
+            currentHighlightType = null;
+            updateFloatingClockVisibility();
+        }
+
+        function copyHighlightSummaryToClipboard() {
+            if (!lastHighlightTextSummary) return;
+            navigator.clipboard?.writeText(lastHighlightTextSummary).catch(() => {});
+            const ta = document.createElement('textarea');
+            ta.value = lastHighlightTextSummary;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+            showToast('تم نسخ ملخص المؤشر بنجاح 📋', 'success');
+        }
+
+        function sendHighlightSummaryToWhatsApp() {
+            if (!lastHighlightTextSummary) return;
+            const msg = `${lastHighlightTextSummary}\n\nإعداد المعلم: أ/ عبدالعزيز الفيفي (ثانوية الأمير عبدالمجيد)`;
+            window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function updateStudentEncouragement(metrics) {
+            const box = document.getElementById('portalEncouragementBox');
+            const iconEl = document.getElementById('portalEncouragementIcon');
+            const titleEl = document.getElementById('portalEncouragementTitle');
+            const msgEl = document.getElementById('portalEncouragementMessage');
+            if (!box || !iconEl || !titleEl || !msgEl) return;
+
+            const { present, absent, late, participationsCount, homeworkDoneCount, totalBehaviorScore } = metrics;
+            const totalEval = present + absent + late;
+            const rate = totalEval > 0 ? Math.round(((present + late) / totalEval) * 100) : 100;
+
+            if (participationsCount >= 3 || totalBehaviorScore >= 5) {
+                iconEl.textContent = '🌟';
+                titleEl.textContent = 'تفاعل مشرق ومتميز!';
+                msgEl.textContent = `ما شاء الله! لديك ${participationsCount} مشاركة وإجمالي نقاط ${totalBehaviorScore}. استمر في هذا العطاء الرائع، فاجتهادك اليوم يبني تفوقك غداً.`;
+            } else if (absent >= 3 || rate < 75) {
+                iconEl.textContent = '🌱';
+                titleEl.textContent = 'نحن معك وبانتظار حضورك المتألق';
+                msgEl.textContent = `نلاحظ وجود غياب (${absent} أيام). لا تقلق؛ كل يوم جديد فرصة للتعويض واللحاق بزملائك، ونحن سعداء بوجودك وحضورك المنتظم معنا.`;
+            } else if (participationsCount === 0 && homeworkDoneCount === 0) {
+                iconEl.textContent = '💡';
+                titleEl.textContent = 'خطوتك الأولى نحو المشاركة';
+                msgEl.textContent = 'لديك قدرات جميلة تستحق الظهور! جرّب المشاركة في الحصة القادمة أو تسليم واجبك مبكراً، فكل محاولة تقرّبك من التميز.';
+            } else {
+                iconEl.textContent = '👏';
+                titleEl.textContent = 'سير طيب وثابت نحو التقدم';
+                msgEl.textContent = `أداؤك مستقر (${present} حضور، ${homeworkDoneCount} واجب منجز). واصل هذا الثبات وزِد من مشاركاتك الصفية لتصل إلى القمة.`;
+            }
         }
 
         function escapeHtml(str) {
