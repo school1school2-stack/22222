@@ -474,7 +474,6 @@
                             <h3 class="font-bold text-slate-800 text-sm">كشف المتابعة اليومية للطلاب </h3>
                         </div>
                         <div class="flex items-center gap-2 flex-wrap">
-                            
                             <div class="relative inline-block text-right">
                                 <select onchange="handleHeaderDropdownAction(this)" class="bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold transition shadow-sm cursor-pointer focus:outline-none">
                                     <option value="" selected disabled>⚡ خيارات وإجراءات سريعة...</option>
@@ -482,12 +481,12 @@
                                     <option value="copy_class">📋 نسخ طلاب الفصل الحالي</option>
                                     <option value="delete_class">🗑️ حذف الفصل الحالي</option>
                                     <option value="backup_json">💾 نسخة احتياطية (JSON)</option>
+                                    <option value="backup_from_scratch">🛡️ نسخة شاملة من الصفر (JSON)</option>
                                     <option value="restore_json">📂 استعادة النسخة الاحتياطية</option>
                                     <option value="export_excel">📊 تصدير كشف Excel / CSV</option>
                                 </select>
                             </div>
                             <input type="file" id="restoreBackupInput" accept=".json" onchange="restoreAttendanceBackupJSON(event)" class="hidden">
-
                         </div>
                     </div>
 
@@ -1005,19 +1004,19 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
             note: 'white'
         };
 
-        let isReadOnly = false; 
+        let isReadOnly = false;
         let isStudentPortal = false;
         let isUnifiedStudentLogin = false;
         let targetStudentId = null;
-        let activeGroup = 'الجميع'; 
-        let groups = ['أول - أول', 'أول - ثاني', 'ثاني - أول']; 
-        let students = []; 
-        let allowedStudentsPreset = []; 
-        let attendanceData = {}; 
+        let activeGroup = 'الجميع';
+        let groups = ['أول - أول', 'أول - ثاني', 'ثاني - أول'];
+        let students = [];
+        let allowedStudentsPreset = [];
+        let attendanceData = {};
         let studentBehaviorsData = {};
         let dailyLessonsData = {};
         let currentDate = new Date().toISOString().split('T')[0];
-        let allAttendanceRecords = {}; 
+        let allAttendanceRecords = {};
         let allBehaviorsRecords = {};
         let currentCustomNoteStudentId = null;
         let currentEditingStudentId = null;
@@ -1066,6 +1065,8 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 deleteCurrentClassData();
             } else if (val === 'backup_json') {
                 exportFullAttendanceBackupJSON();
+            } else if (val === 'backup_from_scratch') {
+                exportCompleteFromScratchJSON();
             } else if (val === 'restore_json') {
                 document.getElementById('restoreBackupInput').click();
             } else if (val === 'export_excel') {
@@ -1702,6 +1703,58 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
             }
         }
 
+        async function exportCompleteFromScratchJSON() {
+            try {
+                showToast('جاري تجهيز النسخة الشاملة من الصفر...', 'cloud');
+                const collectionsToDump = [
+                    "attendance_records",
+                    "student_behaviors_records",
+                    "attendance_students",
+                    "attendance_groups",
+                    "daily_lessons",
+                    "allowed_students"
+                ];
+                const firestoreDump = {};
+
+                for (const colName of collectionsToDump) {
+                    const snap = await db.collection(colName).get();
+                    const docsObj = {};
+                    snap.forEach((doc) => {
+                        docsObj[doc.id] = doc.data();
+                    });
+                    firestoreDump[colName] = docsObj;
+                }
+
+                const localStore = {};
+                for (let i = 0; i < localStorage.length; i++) {
+                    const k = localStorage.key(i);
+                    if (k !== null) localStore[k] = localStorage.getItem(k);
+                }
+
+                const fullPayload = {
+                    version: "2.0-from-scratch",
+                    exportedAt: new Date().toISOString(),
+                    projectId: firebaseConfig.projectId,
+                    firestore: firestoreDump,
+                    localStorage: localStore,
+                    htmlSnapshot: document.documentElement.outerHTML
+                };
+
+                const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(fullPayload, null, 2));
+                const downloadAnchor = document.createElement('a');
+                downloadAnchor.setAttribute("href", dataStr);
+                downloadAnchor.setAttribute("download", `نسخة_شاملة_من_الصفر_${new Date().toISOString().split('T')[0]}.json`);
+                document.body.appendChild(downloadAnchor);
+                downloadAnchor.click();
+                downloadAnchor.remove();
+
+                showToast('تم تصدير النسخة الشاملة بنجاح 💾', 'success');
+            } catch (err) {
+                console.error("Complete backup error:", err);
+                showToast('فشل تصدير النسخة الشاملة', 'warning');
+            }
+        }
+
         async function restoreAttendanceBackupJSON(event) {
             const file = event.target.files[0];
             if (!file) return;
@@ -1716,24 +1769,58 @@ s789012@rb.moe.gov.sa" class="w-full border border-slate-300 rounded-xl p-3 text
                 try {
                     showToast('جاري استعادة البيانات إلى السحابة...', 'cloud');
                     const backupData = JSON.parse(e.target.result);
-                    const batch = db.batch();
+                    let batch = db.batch();
+                    let opCount = 0;
 
-                    if (backupData.attendance_records) {
-                        for (const [dateKey, recordVal] of Object.entries(backupData.attendance_records)) {
-                            const ref = db.collection("attendance_records").doc(dateKey);
-                            batch.set(ref, recordVal, { merge: true });
+                    const commitIfNeeded = async () => {
+                        if (opCount >= 400) {
+                            await batch.commit();
+                            batch = db.batch();
+                            opCount = 0;
+                        }
+                    };
+
+                    if (backupData.firestore && typeof backupData.firestore === "object") {
+                        for (const [colName, docsObj] of Object.entries(backupData.firestore)) {
+                            if (!docsObj || typeof docsObj !== "object") continue;
+                            for (const [docId, docVal] of Object.entries(docsObj)) {
+                                const ref = db.collection(colName).doc(docId);
+                                batch.set(ref, docVal, { merge: true });
+                                opCount++;
+                                await commitIfNeeded();
+                            }
+                        }
+                    } else {
+                        if (backupData.attendance_records) {
+                            for (const [dateKey, recordVal] of Object.entries(backupData.attendance_records)) {
+                                const ref = db.collection("attendance_records").doc(dateKey);
+                                batch.set(ref, recordVal, { merge: true });
+                                opCount++;
+                                await commitIfNeeded();
+                            }
+                        }
+
+                        if (backupData.student_behaviors_records) {
+                            for (const [dateKey, recordVal] of Object.entries(backupData.student_behaviors_records)) {
+                                const ref = db.collection("student_behaviors_records").doc(dateKey);
+                                batch.set(ref, recordVal, { merge: true });
+                                opCount++;
+                                await commitIfNeeded();
+                            }
                         }
                     }
 
-                    if (backupData.student_behaviors_records) {
-                        for (const [dateKey, recordVal] of Object.entries(backupData.student_behaviors_records)) {
-                            const ref = db.collection("student_behaviors_records").doc(dateKey);
-                            batch.set(ref, recordVal, { merge: true });
+                    if (opCount > 0) {
+                        await batch.commit();
+                    }
+
+                    if (backupData.localStorage && typeof backupData.localStorage === "object") {
+                        for (const [k, v] of Object.entries(backupData.localStorage)) {
+                            localStorage.setItem(k, v);
                         }
                     }
 
-                    await batch.commit();
-                    showToast('تمت استعادة البيانات الاحتياطية بنجاح ☁️', 'success');
+                    showToast('تمت الاستعادة بنجاح ☁️', 'success');
                     event.target.value = '';
                 } catch (err) {
                     console.error("Restore backup error:", err);
